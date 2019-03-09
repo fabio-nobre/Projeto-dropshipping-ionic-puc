@@ -3,7 +3,7 @@
 
   <img src="assets/imgs/telainicial.png" alt="logo">
 
-  <form>
+<!--   <form>
     <ion-item>
       <ion-label stacked>Email</ion-label>
       <ion-input type="text"></ion-input>
@@ -17,6 +17,25 @@
     <button ion-button block>Entrar</button>
 
     <button ion-button block outline>Registrar</button>
-  </form>
+  </form> -->
 
+  <ion-list>
+  
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input [(ngModel)]="username" type="text" value=""></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input [(ngModel)]="password"  type="password" value=""></ion-input>
+      </ion-item>
+    
+    </ion-list>
+    
+    <div padding>
+      <button ion-button block (click)="login()">Entrar</button>
+      <button ion-button block outline>Registrar</button>
+    </div>
+  
 </ion-content>
