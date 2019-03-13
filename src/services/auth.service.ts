@@ -8,7 +8,8 @@ import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
-
+            
+    //Tratar token e armazenando-o em localStorage
     jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(
