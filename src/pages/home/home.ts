@@ -39,4 +39,9 @@ export class HomePage {
       },
       error => {});    
   }
+
+  registrar() {
+    // '.push': permite empilhar e voltar para anterior para pagina anterior
+    this.navCtrl.push('SignupPage');
+  }
 }
