@@ -12,6 +12,8 @@ import { ClienteService } from '../../services/domain/cliente.service';
   selector: 'page-signup',
   templateUrl: 'signup.html',
 })
+
+// Classe para cadastrar novo usuário no sistema
 export class SignupPage {
 
   formGroup: FormGroup;
@@ -26,8 +28,6 @@ export class SignupPage {
     public estadoService: EstadoService,
     public clienteService: ClienteService,
     public alertCtrl: AlertController) {
-
-
 
     // Instanciando o FormGroup
     // Colocar os mesmos atributos que tem no formulario
@@ -53,30 +53,43 @@ export class SignupPage {
     });
   }
 
+  // No carregamento da pagina de registro (signup.html)
+  // Carregar os estados e atualizar e suas respectivas cidades
   ionViewDidLoad() {
+    // estado.service.ts/EstadoService/findAll() -> api.config.ts/API_CONFIG.baseUrl/estados = "http://localhost:8080/estados" 
+    // -> SprinBoot | projeto-puc-lojaDropshipping -> EstadoResource.java/findAll() -> EstadoService.java/findAll() 
+    // -> EstadoRepository.java/findAllByOrderByNome()
     this.estadoService.findAll()
-      .subscribe(response => {
-        this.estados = response;
-        this.formGroup.controls.estadoId.setValue(this.estados[0].id);
-        this.updateCidades();
-      },
-      error => {});
+    .subscribe(response => {
+      this.estados = response;
+      this.formGroup.controls.estadoId.setValue(this.estados[0].id);
+      this.updateCidades();
+    },
+    error => {});
   }
-
+  
+  // Carregar as cidades conforme estado selecionado
   updateCidades() {
     let estado_id = this.formGroup.value.estadoId;
+    // cidade.service.ts/EstadoService/findAll(estado_id) -> api.config.ts/API_CONFIG.baseUrl/estados/{estadoId}/cidades = "http://localhost:8080/estados/{estadoId}/cidades" 
+    // -> SprinBoot | projeto-puc-lojaDropshipping -> EstadoResource.java/findCidades(estadoId) -> CidadeService.java/findByEstado(estadoId) 
+    // -> CidadeRepository.java/findCidades(estado_Id)
     this.cidadeService.findAll(estado_id)
-      .subscribe(response => {
-        this.cidades = response;
-        this.formGroup.controls.cidadeId.setValue(null);
-      },
-      error => {});
+    .subscribe(response => {
+      this.cidades = response;
+      this.formGroup.controls.cidadeId.setValue(null);
+    },
+    error => {});
   }
-
+  
+  // Cadastrar novo cliente com os dados informados no formulario (signup.html)
   signupUser() {
     console.log(this.formGroup.value);
+    // cliente.service.ts/ClienteService/insert(ClienteDTO) -> api.config.ts/API_CONFIG.baseUrl/clientes = "http://localhost:8080/clientes , objClienteDTO"  
+    // -> SprinBoot | projeto-puc-lojaDropshipping -> ClienteResource.java/insert(ClienteNewDTO objClienteDTO) -> ClienteService.java/insert(Cliente objCliente) 
+    // -> ClienteRepository.java/save(objCliente)
     this.clienteService.insert(this.formGroup.value)
-      .subscribe(response => {
+    .subscribe(response => {
         this.showInsertOk();
       },
       error => {});
