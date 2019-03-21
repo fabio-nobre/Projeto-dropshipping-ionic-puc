@@ -17,6 +17,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SideMenuSettings } from './../shared/side-menu-content/models/side-menu-settings';
 import { SideMenuOption } from './../shared/side-menu-content/models/side-menu-option';
 import { SideMenuContentComponent } from './../shared/side-menu-content/side-menu-content.component';
+
+// Serviços
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -70,54 +72,23 @@ export class MyApp {
 	private initializeOptions(): void {
 		this.options = new Array<SideMenuOption>();
 
-		// Load simple menu options
-		// ------------------------------------------
-		this.options.push({
-			iconName: 'home',
-			displayText: 'Home',
-			component: 'HomePage',
-		});
 
 		this.options.push({
-			iconName: 'analytics',
-			displayText: 'Administração',
-			component: 'AdministradoresPage'
-		});
-
-		this.options.push({
-			iconName: 'apps',
-			displayText: 'Option 2',
-			component: 'CategoriasPage'
-		});
-
-		this.options.push({
-			iconName: 'log-out',
-			displayText: 'Sair',
-			custom: {
-				isLogout: true
-			}
-		});
-
-		this.options.push({
-			iconName: 'bowtie',
-			displayText: 'Static Badge',
-			badge: ArrayObservable.of('NEW'),
-			component: 'StaticBadgePage'
-		});
-
-		// Load options with nested items (with icons)
-		// -----------------------------------------------
-		this.options.push({
-			displayText: 'With icons',
+			displayText: 'Gerenciamento',
 			suboptions: [
 				{
+					iconName: 'settings',
+					displayText: 'Perfis de Usuário',
+					component: 'WithIconsSubOptionTwoPage'
+				},				
+				{
 					iconName: 'basket',
-					displayText: 'Sub Option 1',
+					displayText: 'Fornecedores',
 					component: 'WithIconsSubOptionOnePage'
 				},
 				{
 					iconName: 'bookmark',
-					displayText: 'Sub Option 2',
+					displayText: 'Produtos',
 					component: 'WithIconsSubOptionTwoPage'
 				},
 				{
@@ -129,77 +100,194 @@ export class MyApp {
 			]
 		});
 
-		// Load options with nested items (without icons)
-		// -----------------------------------------------
 		this.options.push({
-			displayText: 'Without icons',
+			displayText: 'Área do Cliente',
 			suboptions: [
 				{
-					displayText: 'Sub Option 1',
-					component: 'WithoutIconsSubOptionOnePage'
+					iconName: 'settings',
+					displayText: 'Perfil',
+					component: 'WithIconsSubOptionOnePage'
 				},
 				{
-					displayText: 'Sub Option 2',
-					component: 'WithoutIconsSubOptionTwoPage'
+					iconName: 'bookmark',
+					displayText: 'Pedidos',
+					component: 'WithIconsSubOptionTwoPage'
+				},				
+				{
+					iconName: 'bookmark',
+					displayText: 'Produtos',
+					component: 'WithIconsSubOptionTwoPage'
 				},
 			]
 		});
 
 		this.options.push({
-			displayText: 'Same component',
+			displayText: 'Vendedores',
 			suboptions: [
 				{
-					iconName: 'mail',
-					displayText: 'Inbox',
-					component: 'EmailsPage',
-					custom: {
-						param: { showDeleted: false }
-					}
+					iconName: 'settings',
+					displayText: 'Perfil',
+					component: 'WithIconsSubOptionOnePage'
 				},
 				{
-					iconName: 'trash',
-					displayText: 'Bin',
-					component: 'EmailsPage',
-					custom: {
-						param: { showDeleted: true }
-					}
-				}
+					iconName: 'bookmark',
+					displayText: 'Clientes',
+					component: 'WithIconsSubOptionTwoPage'
+				},				
+				{
+					iconName: 'bookmark',
+					displayText: 'Pedidos',
+					component: 'WithIconsSubOptionTwoPage'
+				},
+				{
+					iconName: 'bookmark',
+					displayText: 'Produtos',
+					component: 'WithIconsSubOptionTwoPage'
+				},
 			]
 		});
 
-		// Load special options
-		// -----------------------------------------------
 		this.options.push({
-			displayText: 'Special options',
-			suboptions: [
-				{
-					iconName: 'log-in',
-					displayText: 'Login',
-					custom: {
-						isLogin: true
-					}
-				},
-				{
-					iconName: 'log-out',
-					displayText: 'Logout',
-					custom: {
-						isLogout: true
-					}
-				},
-				{
-					iconName: 'globe',
-					displayText: 'Open Google',
-					custom: {
-						isExternalLink: true,
-						externalUrl: 'http://www.google.com'
-					}
-				}
-			]
+			iconName: 'log-out',
+			displayText: 'Sair',
+			custom: {
+				isLogout: true
+			}
 		});
 
+
+		{
+		// // Load simple menu options
+		// // ------------------------------------------
+		// this.options.push({
+		// 	iconName: 'home',
+		// 	displayText: 'Home',
+		// 	component: 'HomePage',
+		// });
+
+		// this.options.push({
+		// 	iconName: 'analytics',
+		// 	displayText: 'Administração',
+		// 	component: 'AdministradoresPage'
+		// });
+
+		// this.options.push({
+		// 	iconName: 'apps',
+		// 	displayText: 'Option 2',
+		// 	component: 'CategoriasPage'
+		// });
+
+		// this.options.push({
+		// 	iconName: 'log-out',
+		// 	displayText: 'Sair',
+		// 	custom: {
+		// 		isLogout: true
+		// 	}
+		// });
+
+		// this.options.push({
+		// 	iconName: 'bowtie',
+		// 	displayText: 'Static Badge',
+		// 	badge: ArrayObservable.of('NEW'),
+		// 	component: 'StaticBadgePage'
+		// });
+
+		// // Load options with nested items (with icons)
+		// // -----------------------------------------------
+		// this.options.push({
+		// 	displayText: 'With icons',
+		// 	suboptions: [
+		// 		{
+		// 			iconName: 'basket',
+		// 			displayText: 'Sub Option 1',
+		// 			component: 'WithIconsSubOptionOnePage'
+		// 		},
+		// 		{
+		// 			iconName: 'bookmark',
+		// 			displayText: 'Sub Option 2',
+		// 			component: 'WithIconsSubOptionTwoPage'
+		// 		},
+		// 		{
+		// 			iconName: 'bug',
+		// 			displayText: 'Dynamic Badge',
+		// 			badge: this.unreadCountObservable,
+		// 			component: 'DynamicBadgePage'
+		// 		}
+		// 	]
+		// });
+
+		// // Load options with nested items (without icons)
+		// // -----------------------------------------------
+		// this.options.push({
+		// 	displayText: 'Without icons',
+		// 	suboptions: [
+		// 		{
+		// 			displayText: 'Sub Option 1',
+		// 			component: 'WithoutIconsSubOptionOnePage'
+		// 		},
+		// 		{
+		// 			displayText: 'Sub Option 2',
+		// 			component: 'WithoutIconsSubOptionTwoPage'
+		// 		},
+		// 	]
+		// });
+
+		// this.options.push({
+		// 	displayText: 'Same component',
+		// 	suboptions: [
+		// 		{
+		// 			iconName: 'mail',
+		// 			displayText: 'Inbox',
+		// 			component: 'EmailsPage',
+		// 			custom: {
+		// 				param: { showDeleted: false }
+		// 			}
+		// 		},
+		// 		{
+		// 			iconName: 'trash',
+		// 			displayText: 'Bin',
+		// 			component: 'EmailsPage',
+		// 			custom: {
+		// 				param: { showDeleted: true }
+		// 			}
+		// 		}
+		// 	]
+		// });
+
+		// // Load special options
+		// // -----------------------------------------------
+		// this.options.push({
+		// 	displayText: 'Special options',
+		// 	suboptions: [
+		// 		{
+		// 			iconName: 'log-in',
+		// 			displayText: 'Login',
+		// 			custom: {
+		// 				isLogin: true
+		// 			}
+		// 		},
+		// 		{
+		// 			iconName: 'log-out',
+		// 			displayText: 'Logout',
+		// 			custom: {
+		// 				isLogout: true
+		// 			}
+		// 		},
+		// 		{
+		// 			iconName: 'globe',
+		// 			displayText: 'Open Google',
+		// 			custom: {
+		// 				isExternalLink: true,
+		// 				externalUrl: 'http://www.google.com'
+		// 			}
+		// 		}
+		// 	]
+		// });
+		}
 	}
 
 
+	// Na seleção das opções do menu
 	public onOptionSelected(option: SideMenuOption): void {
 		this.menuCtrl.close().then(() => {
 			if (option.custom && option.custom.isLogin) {
