@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, Injector } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
@@ -14,8 +14,12 @@ import { StorageService } from '../services/storage.service';
 import { ClienteService } from '../services/domain/cliente.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 
+// Custom components
+import { SideMenuContentComponent } from '../shared/side-menu-content/side-menu-content.component';
+
 @NgModule({
   declarations: [
+    SideMenuContentComponent,
     MyApp
   ],
   imports: [
@@ -39,4 +43,12 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
     ClienteService
   ]
 })
-export class AppModule {}
+export class AppModule {
+    // Make the injector to be available in the entire module
+  // so we can use it in the custom decorator
+  static injector: Injector;
+
+  constructor(injector: Injector) {
+    AppModule.injector = injector;
+  }
+}
