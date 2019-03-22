@@ -35,10 +35,10 @@ export class HomePage {
     this.auth.refreshToken()
       .subscribe(response => {
         this.auth.successfulLogin(response.headers.get('Authorization'));
-        this.navCtrl.setRoot('CategoriasPage');
+        this.navCtrl.setRoot('NavegacaoPage');
       },
-      // error => {});  
-      error => {this.navCtrl.setRoot('CategoriasPage')});  
+      error => {});  
+      // error => {this.navCtrl.setRoot('NavegacaoPage')});  
       
   }
   
@@ -47,6 +47,7 @@ export class HomePage {
       .subscribe(response => {
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.setRoot('CategoriasPage');
+        this.navCtrl.setRoot('NavegacaoPage');
       },
       error => {});    
   }

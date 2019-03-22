@@ -37,7 +37,7 @@ export class MyApp {
 
 	// Settings for the SideMenuContentComponent
 	public sideMenuSettings: SideMenuSettings = {
-		accordionMode: true,
+		accordionMode: true, // Se false permite que todos os menus possam ser abertos simultaneamente
 		showSelectedOption: true,
 		selectedOptionClass: 'active-side-menu-option'		
 	};
@@ -69,84 +69,99 @@ export class MyApp {
 
 	}
 
+	// Opções exibidas no menu
 	private initializeOptions(): void {
 		this.options = new Array<SideMenuOption>();
 
-
+		// Opções do menu de Administrador
 		this.options.push({
-			displayText: 'Gerenciamento',
+			displayText: 'Administrador',
 			suboptions: [
 				{
-					iconName: 'settings',
-					displayText: 'Perfis de Usuário',
-					component: 'WithIconsSubOptionTwoPage'
-				},				
+					iconName: 'people',
+					displayText: 'Clientes',
+					component: 'ClientesPage'
+				},					
 				{
-					iconName: 'basket',
+					iconName: 'cloud-outline',
 					displayText: 'Fornecedores',
-					component: 'WithIconsSubOptionOnePage'
+					component: 'FornecedoresPage'
 				},
 				{
-					iconName: 'bookmark',
+					iconName: 'at',
+					displayText: 'Pedidos',
+					component: 'PedidosPage'
+				},
+				{
+					iconName: 'cart',
 					displayText: 'Produtos',
-					component: 'WithIconsSubOptionTwoPage'
+					component: 'ProdutosPage'
 				},
 				{
-					iconName: 'bug',
-					displayText: 'Dynamic Badge',
-					badge: this.unreadCountObservable,
-					component: 'DynamicBadgePage'
-				}
+					iconName: 'briefcase',
+					displayText: 'Vendedores',
+					component: 'VendedoresPage'
+				},
 			]
 		});
-
+		
+		// Opções do menu de Clientes
 		this.options.push({
-			displayText: 'Área do Cliente',
+			displayText: 'Cliente',
 			suboptions: [
 				{
 					iconName: 'settings',
 					displayText: 'Perfil',
-					component: 'WithIconsSubOptionOnePage'
+					component: 'ProfilePage'
 				},
 				{
-					iconName: 'bookmark',
+					iconName: 'at',
 					displayText: 'Pedidos',
-					component: 'WithIconsSubOptionTwoPage'
+					component: 'PedidosPage'
 				},				
 				{
-					iconName: 'bookmark',
+					iconName: 'cart',
 					displayText: 'Produtos',
-					component: 'WithIconsSubOptionTwoPage'
+					component: 'ProdutosPage'
 				},
 			]
 		});
 
+		// Opções do menu de Vendedores
 		this.options.push({
 			displayText: 'Vendedores',
 			suboptions: [
 				{
 					iconName: 'settings',
 					displayText: 'Perfil',
-					component: 'WithIconsSubOptionOnePage'
+					component: 'ProfilePage'
 				},
 				{
-					iconName: 'bookmark',
+					iconName: 'person',
 					displayText: 'Clientes',
-					component: 'WithIconsSubOptionTwoPage'
+					component: 'ClientesPage'
 				},				
 				{
-					iconName: 'bookmark',
+					iconName: 'at',
 					displayText: 'Pedidos',
-					component: 'WithIconsSubOptionTwoPage'
+					component: 'PedidosPage'
 				},
 				{
-					iconName: 'bookmark',
+					iconName: 'cart',
 					displayText: 'Produtos',
-					component: 'WithIconsSubOptionTwoPage'
+					component: 'ProdutosPage'
 				},
 			]
 		});
 
+		this.options.push({
+			iconName: 'bug',
+			displayText: 'Dynamic Badge',
+			badge: this.unreadCountObservable,
+			component: 'DynamicBadgePage'
+		});
+
+		// Opções para sair do Sistema
 		this.options.push({
 			iconName: 'log-out',
 			displayText: 'Sair',
@@ -154,138 +169,7 @@ export class MyApp {
 				isLogout: true
 			}
 		});
-
-
-		{
-		// // Load simple menu options
-		// // ------------------------------------------
-		// this.options.push({
-		// 	iconName: 'home',
-		// 	displayText: 'Home',
-		// 	component: 'HomePage',
-		// });
-
-		// this.options.push({
-		// 	iconName: 'analytics',
-		// 	displayText: 'Administração',
-		// 	component: 'AdministradoresPage'
-		// });
-
-		// this.options.push({
-		// 	iconName: 'apps',
-		// 	displayText: 'Option 2',
-		// 	component: 'CategoriasPage'
-		// });
-
-		// this.options.push({
-		// 	iconName: 'log-out',
-		// 	displayText: 'Sair',
-		// 	custom: {
-		// 		isLogout: true
-		// 	}
-		// });
-
-		// this.options.push({
-		// 	iconName: 'bowtie',
-		// 	displayText: 'Static Badge',
-		// 	badge: ArrayObservable.of('NEW'),
-		// 	component: 'StaticBadgePage'
-		// });
-
-		// // Load options with nested items (with icons)
-		// // -----------------------------------------------
-		// this.options.push({
-		// 	displayText: 'With icons',
-		// 	suboptions: [
-		// 		{
-		// 			iconName: 'basket',
-		// 			displayText: 'Sub Option 1',
-		// 			component: 'WithIconsSubOptionOnePage'
-		// 		},
-		// 		{
-		// 			iconName: 'bookmark',
-		// 			displayText: 'Sub Option 2',
-		// 			component: 'WithIconsSubOptionTwoPage'
-		// 		},
-		// 		{
-		// 			iconName: 'bug',
-		// 			displayText: 'Dynamic Badge',
-		// 			badge: this.unreadCountObservable,
-		// 			component: 'DynamicBadgePage'
-		// 		}
-		// 	]
-		// });
-
-		// // Load options with nested items (without icons)
-		// // -----------------------------------------------
-		// this.options.push({
-		// 	displayText: 'Without icons',
-		// 	suboptions: [
-		// 		{
-		// 			displayText: 'Sub Option 1',
-		// 			component: 'WithoutIconsSubOptionOnePage'
-		// 		},
-		// 		{
-		// 			displayText: 'Sub Option 2',
-		// 			component: 'WithoutIconsSubOptionTwoPage'
-		// 		},
-		// 	]
-		// });
-
-		// this.options.push({
-		// 	displayText: 'Same component',
-		// 	suboptions: [
-		// 		{
-		// 			iconName: 'mail',
-		// 			displayText: 'Inbox',
-		// 			component: 'EmailsPage',
-		// 			custom: {
-		// 				param: { showDeleted: false }
-		// 			}
-		// 		},
-		// 		{
-		// 			iconName: 'trash',
-		// 			displayText: 'Bin',
-		// 			component: 'EmailsPage',
-		// 			custom: {
-		// 				param: { showDeleted: true }
-		// 			}
-		// 		}
-		// 	]
-		// });
-
-		// // Load special options
-		// // -----------------------------------------------
-		// this.options.push({
-		// 	displayText: 'Special options',
-		// 	suboptions: [
-		// 		{
-		// 			iconName: 'log-in',
-		// 			displayText: 'Login',
-		// 			custom: {
-		// 				isLogin: true
-		// 			}
-		// 		},
-		// 		{
-		// 			iconName: 'log-out',
-		// 			displayText: 'Logout',
-		// 			custom: {
-		// 				isLogout: true
-		// 			}
-		// 		},
-		// 		{
-		// 			iconName: 'globe',
-		// 			displayText: 'Open Google',
-		// 			custom: {
-		// 				isExternalLink: true,
-		// 				externalUrl: 'http://www.google.com'
-		// 			}
-		// 		}
-		// 	]
-		// });
-		}
 	}
-
 
 	// Na seleção das opções do menu
 	public onOptionSelected(option: SideMenuOption): void {
@@ -308,10 +192,11 @@ export class MyApp {
 		});
 	}
 
-	public collapseMenuOptions(): void {
-		this.sideMenu.collapseAllOptions();
-	}
+	// public collapseMenuOptions(): void {
+	// 	this.sideMenu.collapseAllOptions();
+	// }
 
+	// Alert 
 	public presentAlert(message: string): void {
 		let alert = this.alertCtrl.create({
 			title: 'Information',
@@ -321,20 +206,19 @@ export class MyApp {
 		alert.present();
 	}
 
-	
-	  // No click da opção do menu definido no 'app.html'
-	  openPage(page : {title:string, component:string}) {
+	// No click da opção do menu definido no 'app.html'
+	openPage(page : {title:string, component:string}) {
 
-		switch (page.title) {
-		  case 'Sair':
-		  this.auth.logout ();
-		  this.nav.setRoot('HomePage');
-		  break;
-	
-		  default:
-		  this.nav.setRoot(page.component);
-		}
-	
-	  }
+	switch (page.title) {
+		case 'Sair':
+		this.auth.logout ();
+		this.nav.setRoot('HomePage');
+		break;
+
+		default:
+		this.nav.setRoot(page.component);
+	}
+
+	}
 
 }

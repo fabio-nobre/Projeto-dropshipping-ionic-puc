@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Clientes</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+
+      <form [formGroup]="formGroup" (ngSubmit)="consultarClinete(); $event.preventDefault()">
+          
+        <ion-item>
+          <ion-label stacked>Email*</ion-label>
+          <ion-input formControlName="email" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Nome</ion-label>
+            <ion-label>{{nome}} </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Documento</ion-label>
+            <ion-label>{{cpfOuCnpj}} </ion-label>
+        </ion-item>
+        
+        
+        <p class="danger" *ngIf="formGroup.controls.email.dirty && formGroup.controls.email.errors" margin-left>Valor inválido</p>
+        
+        <button ion-button block type="submit" [disabled]="formGroup.invalid">Consultar</button>
+
+      </form>
+  
+  </ion-content>
+  
